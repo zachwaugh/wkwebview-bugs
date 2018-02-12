@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WKWebView content inset bugs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system; margin: 0; padding: 10px;}
+    
+    div {
+      background-color: #e7e7e7;
+      height: 60px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 60px;
+    }
+
+    .overlay {
+      position: fixed;
+      background: rgba(255, 0, 212, 0.05);
+      border: 2px solid magenta; 
+    }
+
+    button {
+      height: 50px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+    <h1>Position: fixed content inset bug</h1>
+    <p>
+      Tap the number in any row to dynamically add a new element, which is configured to overlay the current element exactly.
+      This is positioned using `position: fixed` and the rect obtained from tapped element by calling `element.getBoundingClientRect()`.
+       When the content insets are controlled manually, `position: fixed` elements are not positioned correctly. This succeeds in tab 1,
+      but fails in tab 2. This can be confirmed visually and by comparing the `overlay.getBoundingClientRect()` to the `overly.style.top`. Ensure
+      you scroll at least a little, the bug doesn't occur when the content is already at the top.
+    </p>
+
+    <p>
+      In tabs 3 and 4, it succeeds. They are the same as 1 and 2, but the view doesn't sit beneath the nav bar.
+    </p>
+
+    <div id="b1">
+      <a href="#">1</a>
+    </div>
+    <div id="b2">
+      <a href="#">2</a>
+    </div>
+    <div id="b3">
+      <a href="#">3</a>
+    </div>
+    <div id="b4">
+      <a href="#">4</a>
+    </div>
+    <div id="b5">
+      <a href="#">5</a>
+    </div>
+    <div id="b6">
+      <a href="#">6</a>
+    </div>
+    <div id="b7">
+      <a href="#">7</a>
+    </div>
+    <div id="b8">
+      <a href="#">8</a>
+    </div>
+    <div id="b9">
+      <a href="#">9</a>
+    </div>
+    <div id="b10">
+      <a href="#">10</a>
+    </div>
+  <script>
+    function addFixedElement(rect) {
+      let element = document.createElement("div");
+      element.className = "overlay";
+      element.style = "height: " + rect.height + "px; left: " + rect.left + "px; width: " + rect.width + "px; top: " + rect.top + "px;";
+      document.body.appendChild(element);
+
+      return element;
+    }
+
+    function verifyPosition(element) {
+      let rect = element.getBoundingClientRect();
+      let top = parseInt(element.style.top);
+      return rect.top == top;
+    }
+
+    document.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (event.target.tagName != "A") return;
+
+      let rect = event.target.parentElement.getBoundingClientRect()
+      addFixedElement(rect)
+
+      return false;
+    })
+
+    document.addEventListener("scroll", () => {
+      const overlays = document.querySelectorAll(".overlay");
+      overlays.forEach((overlay) => overlay.parentElement.removeChild(overlay));
+    })
+  </script>
+</body>
+</html>

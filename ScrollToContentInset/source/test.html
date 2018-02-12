@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WKWebView content inset bugs</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+  <style>
+    * { box-sizing: border-box; }
+    body { font-family: -apple-system; margin: 0; padding: 10px;}
+    
+    div {
+      background-color: #e7e7e7;
+      height: 60px;
+      margin-bottom: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 60px;
+    }
+
+    button {
+      height: 50px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+    <h1>window.scrollTo() - content inset bug</h1>
+    <p>
+       Scroll to the bottom and hit the "Scroll to top" button, which calls `window.scrollTo(0,
+      0)`. The `h1` should be at the top of the viewport, but it sits beneath the nav bar. When the content insets are adjusted automatically,
+       scrolling from the DOM using `window.scrollTo()` doesn't work correctly.
+    </p>
+
+    <p>
+       This fails in tab 1 which uses automatic adjustments, and succeeds in tab 2, which has manual adjustments.
+       It succeeds in tabs 3 and 4, which are the same as 1 and 2, but the view doesn't sit beneath the nav bar or tab bar
+    </p>
+
+    <div id="b1">1</div>
+    <div id="b2">2</div>
+    <div id="b3">3</div>
+    <div id="b4">4</div>
+    <div id="b5">5</div>
+    <div id="b6">6</div>
+    <div id="b7">7</div>
+    <div id="b8">8</div>
+    <div id="b9">9</div>
+    <div id="b10">10</div>
+
+    <button id="scroll-to-top">Scroll to top</button>
+
+  <script>
+    document.getElementById("scroll-to-top").addEventListener("click", (event) => {
+      event.preventDefault();
+      window.scrollTo(0, 0)
+    })
+  </script>
+</body>
+</html>
