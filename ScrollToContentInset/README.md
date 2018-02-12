@@ -7,3 +7,7 @@ When the content insets are adjusted automatically, scrolling from the DOM using
 
 
 This issue is present when the web view sits beneath the nav bar, but not otherwise.
+
+
+On the left, you can see the broken behavior after scrolling all the way to the top. On the right, you can see where it should have scrolled:
+![screenshot](https://github.com/zachwaugh/wkwebview-bugs/raw/master/Screenshots/scroll-to-content-inset.png)
