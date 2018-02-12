@@ -1,5 +1,7 @@
 #  WKWebView content inset bugs
 
+- WebKit Bug Report - https://bugs.webkit.org/show_bug.cgi?id=182710
+
 As of iOS 11, WKWebView's scrollView's contentInsets can be adjusted automatically by iOS or manually. No matter
 which you choose, something breaks with respects to various DOM APIs related to scrolling.
 
