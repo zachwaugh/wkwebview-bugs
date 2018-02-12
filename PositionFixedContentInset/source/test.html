@@ -8,7 +8,7 @@
     * { box-sizing: border-box; }
     body { font-family: -apple-system; margin: 0; padding: 10px;}
     
-    div {
+    .row {
       background-color: #e7e7e7;
       height: 60px;
       margin-bottom: 10px;
@@ -21,7 +21,12 @@
     .overlay {
       position: fixed;
       background: rgba(255, 0, 212, 0.05);
-      border: 2px solid magenta; 
+      border: 2px solid magenta;
+      font-size: 12px;
+    }
+
+    code {
+      background-color: #f0f0f0;
     }
 
     button {
@@ -35,51 +40,52 @@
     <h1>Position: fixed content inset bug</h1>
     <p>
       Tap the number in any row to dynamically add a new element, which is configured to overlay the current element exactly.
-      This is positioned using `position: fixed` and the rect obtained from tapped element by calling `element.getBoundingClientRect()`.
-       When the content insets are controlled manually, `position: fixed` elements are not positioned correctly. This succeeds in tab 1,
-      but fails in tab 2. This can be confirmed visually and by comparing the `overlay.getBoundingClientRect()` to the `overly.style.top`. Ensure
+      This is positioned using <code>position: fixed</code> and the rect obtained from tapped element by calling <code>element.getBoundingClientRect()</code>.
+      This succeeds in tab 1 with automatic adjustment, but fails in tab 2 with manual adjustment. They both have the same exact insets though.
+      This can be confirmed visually by noticing when the overlay doesn't match up, as it has the number of the clicked row. Ensure
       you scroll at least a little, the bug doesn't occur when the content is already at the top.
     </p>
 
     <p>
-      In tabs 3 and 4, it succeeds. They are the same as 1 and 2, but the view doesn't sit beneath the nav bar.
+      It also works in tabs 3 and 4, which are the same as 1 and 2, but the view doesn't sit beneath the nav bar or tab bar.
     </p>
 
-    <div id="b1">
+    <div class="row">
       <a href="#">1</a>
     </div>
-    <div id="b2">
+    <div class="row">
       <a href="#">2</a>
     </div>
-    <div id="b3">
+    <div class="row">
       <a href="#">3</a>
     </div>
-    <div id="b4">
+    <div class="row">
       <a href="#">4</a>
     </div>
-    <div id="b5">
+    <div class="row">
       <a href="#">5</a>
     </div>
-    <div id="b6">
+    <div class="row">
       <a href="#">6</a>
     </div>
-    <div id="b7">
+    <div class="row">
       <a href="#">7</a>
     </div>
-    <div id="b8">
+    <div class="row">
       <a href="#">8</a>
     </div>
-    <div id="b9">
+    <div  class="row">
       <a href="#">9</a>
     </div>
-    <div id="b10">
+    <div class="row">
       <a href="#">10</a>
     </div>
   <script>
-    function addFixedElement(rect) {
+    function addFixedElement(text, rect) {
       let element = document.createElement("div");
       element.className = "overlay";
       element.style = "height: " + rect.height + "px; left: " + rect.left + "px; width: " + rect.width + "px; top: " + rect.top + "px;";
+      element.innerText = text;
       document.body.appendChild(element);
 
       return element;
@@ -96,8 +102,9 @@
 
       if (event.target.tagName != "A") return;
 
+      let text = event.target.text
       let rect = event.target.parentElement.getBoundingClientRect()
-      addFixedElement(rect)
+      addFixedElement(text, rect)
 
       return false;
     })
