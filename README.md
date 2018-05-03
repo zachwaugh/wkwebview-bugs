@@ -11,3 +11,8 @@ A collection of sample projects related to WKWebView bugs discovered:
 - [Details](https://github.com/zachwaugh/wkwebview-bugs/tree/master/ScrollToContentInset)
 - https://bugs.webkit.org/show_bug.cgi?id=182710
 
+
+## #3) A WKWebView that is presented modally and uses a file picker will be incorrectly dismissed by the system
+
+- [Details](https://github.com/zachwaugh/wkwebview-bugs/tree/master/ModalFileDismissal)
+- 

@@ -1,13 +1,10 @@
-#  WKWebView content inset bugs
+#  WKWebView modal file dismissal bug
 
-As of iOS 11, WKWebView's scrollView's contentInsets can be adjusted automatically by iOS or manually. No matter
-which you choose, something breaks with respects to various DOM APIs related to scrolling.
+- WebKit Bug
 
-When the content insets are adjusted automatically, scrolling from the DOM using `window.scrollTo()` doesn't work correctly. In the test app in tab 1, you can scroll to the bottom and hit the "Scroll to top" button, which calls `window.scrollTo(0, 0)`. The `h1` should be at the top of the viewport, but it sits beneath the nav bar. This same action works correctly in tab 2, which has manual adjustments.
+When a `WKWebView` is presented in a modal and a file picker is displayed, taking any actions from within the file browser will result in the file browser modal being dismissed as well as the application modal. The expected result is only the file browser modal is dismissed.
 
+The test app demonstrates this bug by providing a view controller that presents another view controller modally that contains the web view. Attempting to choose a file from that modal will result in the modal being automatically dismissed and unable to use the result of the file picking operation.
 
-This issue is present when the web view sits beneath the nav bar, but not otherwise.
-
-
-On the left, you can see the broken behavior after scrolling all the way to the top. On the right, you can see where it should have scrolled:
-![screenshot](https://github.com/zachwaugh/wkwebview-bugs/raw/master/Screenshots/scroll-to-content-inset.png)
+In this gif, you can see that when I choose "Cancel" or select a file from the file browser, the file browser modal is dismissed as well as my modal
+![screenshot](https://github.com/zachwaugh/wkwebview-bugs/raw/master/Screenshots/modal-file-dismissal.gif)
