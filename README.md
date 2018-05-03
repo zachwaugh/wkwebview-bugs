@@ -15,4 +15,4 @@ A collection of sample projects related to WKWebView bugs discovered:
 ## #3) A WKWebView that is presented modally and uses a file picker will be incorrectly dismissed by the system
 
 - [Details](https://github.com/zachwaugh/wkwebview-bugs/tree/master/ModalFileDismissal)
-- 
+- https://bugs.webkit.org/show_bug.cgi?id=185257
