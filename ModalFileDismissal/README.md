@@ -16,5 +16,6 @@ The test app demonstrates this bug by providing a view controller that presents 
 7. Upon either of those actions, the file browser modal will be dismissed as well as this application modal that contains the web view
 8. The expected behavior is only the file browser modal is dismissed and the application modal remains
 
-In this gif, you can see that when I choose "Cancel" or select a file from the file browser, the file browser modal is dismissed as well as my modal
+In this gif, you can see that when I choose "Cancel" or select a file from the file browser, the file browser modal is dismissed as well as my modal:
+
 ![screenshot](https://github.com/zachwaugh/wkwebview-bugs/raw/master/Screenshots/modal-file-dismissal.gif)
