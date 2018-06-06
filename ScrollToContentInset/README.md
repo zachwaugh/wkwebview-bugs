@@ -12,7 +12,7 @@ When a WKWebView's scrollView's contentInsets are adjusted automatically (`conte
 This bug appears to have been fixed in 11.3. Testing in 11.3 and 11.4, everything works correctly for all configurations.
 
 ## On iOS 12
-When a WKWebView's scrollView's contentInsets are adjusted automatically, `window.scrollTo()` works correctly. When `contentInsetAdjustmentBehavior = .never`, a call `window.scrollTo(0, 0)` will not scroll the page all the way to the top, but leaves part of the content sitting beneath the navigation bar. This issue is present when the web view sits beneath the nav bar/tab bar, but not otherwise. 
+When a WKWebView's scrollView's contentInsets are adjusted automatically, `window.scrollTo()` works correctly. When `contentInsetAdjustmentBehavior = .never`, a call `window.scrollTo(0, 0)` will not scroll the page all the way to the top, but leaves part of the content sitting beneath the navigation bar. This issue is present when the web view sits beneath the nav bar/tab bar, but not otherwise. This is the opposite of the original bug in 11.2.
 
 On the left, you can see the broken behavior after scrolling all the way to the top. On the right, you can see where it should have scrolled:
 ![screenshot](https://github.com/zachwaugh/wkwebview-bugs/raw/master/Screenshots/scroll-to-content-inset.png)
