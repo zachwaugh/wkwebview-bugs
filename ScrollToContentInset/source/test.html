@@ -29,19 +29,19 @@
     <h1>window.scrollTo() - content inset bug</h1>
     <p>
        Scroll to the bottom and hit the "Scroll to top" button, which calls <code>window.scrollTo(0,
-      0)</code>. The <code>h1</code> should be at the top of the viewport. Depending on content inset adjustment behavior and OS version, scrolling from the DOM will fail and the content will sit beneath the nav bar.
+    0)</code>. The <code>h1</code> should be at the top of the viewport. Depending on content inset adjustment behavior and OS version, scrolling from the DOM will fail and the content will sit beneath the nav bar.
     </p>
     
     <ul>
-        <li><strong>Tab 1 (Auto)</strong>: automatic content inset adjustment, underneath nav bar and tab bar</li>
-        <li><strong>Tab 2 (Manual)</strong>: manual content inset adjustment, underneath nav bar and tab bar</li>
-        <li><strong>Tab 3 (Auto 2)</strong>: automatic content inset adjustment, not underneath nav bar and tab bar</li>
-        <li><strong>Tab 4 (Manual 2)</strong>: manual content inset  adjustment, not underneath nav bar and tab bar</li>
+        <li><strong>Tab 1 (Auto / Underlay)</strong>: automatic content inset adjustment, underneath nav bar and tab bar</li>
+        <li><strong>Tab 2 (Manual / Underlay)</strong>: manual content inset adjustment, underneath nav bar and tab bar</li>
+        <li><strong>Tab 3 (Auto / No Underlay)</strong>: automatic content inset adjustment, not underneath nav bar and tab bar</li>
+        <li><strong>Tab 4 (Manual / No Underlay)</strong>: manual content inset  adjustment, not underneath nav bar and tab bar</li>
         
     </ul>
 
     <p>
-    <strong>On iOS 12 beta 1:</strong>
+    <strong>On iOS 12.0 and later:</strong>
        This <em>works</em> in tabs 1, 3, and 4. It <em>fails</em> in tab 2 (opposite of the initial bug)
     </p>
     
